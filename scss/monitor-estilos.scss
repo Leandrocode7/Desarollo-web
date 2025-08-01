@@ -1,0 +1,576 @@
+// Variables SCSS
+$primary-color: #007bff;
+$primary-dark: #0056b3;
+$secondary-color: #333;
+$secondary-dark: #212529;
+$accent-color: #ffc107;
+$text-light: #fff;
+$text-dark: #333;
+$text-muted: #ddd;
+$background-overlay: rgba(0, 0, 0, 0.8);
+$card-background: rgba(255, 255, 255, 0.1);
+$border-light: rgba(255, 255, 255, 0.2);
+$shadow-light: rgba(0, 0, 0, 0.3);
+$shadow-strong: rgba(0, 0, 0, 0.5);
+$blur-effect: blur(10px);
+$transition-smooth: all 0.3s ease;
+$border-radius: 10px;
+$spacing-small: 15px;
+$spacing-medium: 30px;
+$spacing-large: 40px;
+
+// Mixins
+@mixin glassmorphism($bg-opacity: 0.1, $border-opacity: 0.2) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: $blur-effect;
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+  border-radius: $border-radius;
+}
+
+@mixin text-shadow($color: rgba(0, 0, 0, 0.5)) {
+  text-shadow: 2px 2px 4px $color;
+}
+
+@mixin hover-lift {
+  transition: $transition-smooth;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px $shadow-light;
+  }
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Estilos base para página de monitores
+body {
+  font-family: "Arial", sans-serif;
+  background: url("Imagenes/cpu.png") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  // Padding-top más pequeño para el header compacto
+  padding-top: 120px;
+
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+}
+
+// Header styles - ACTUALIZADO PARA SER IDÉNTICO A estilos.css
+header {
+  background: $text-light;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  // Reducimos el padding vertical
+  padding: 8px 0;
+  transition: $transition-smooth;
+
+  #logotipo {
+    text-align: center;
+    // Reducimos el margen inferior
+    margin-bottom: 8px;
+
+    img {
+      // Reducimos el tamaño del logo (igual que estilos.css)
+      width: 100px;
+      height: auto;
+      transition: $transition-smooth;
+      // Mantenemos la animación pulse
+      animation: pulse 2s infinite;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Ajuste específico para el header fijo
+  width: 100%;
+  margin: 0;
+  max-width: none;
+
+  > div {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+
+  // Navegación a ancho completo - MODIFICADO
+  nav {
+    background: $secondary-color;
+    border-radius: 0; // Removido border-radius para que ocupe todo el ancho
+    margin: 0; // Removido margin lateral para que se extienda completamente
+    width: 100%; // Asegura que ocupe todo el ancho
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      li {
+        // Reducimos la altura de línea
+        line-height: 2.2rem;
+        position: relative;
+
+        a {
+          display: block;
+          color: $text-light;
+          text-decoration: none;
+          // Reducimos el padding
+          padding: 8px 15px;
+          transition: background-color 0.3s ease;
+          border-radius: 5px;
+          margin: 2px;
+          // Reducimos el tamaño de fuente
+          font-size: 0.9em;
+
+          i {
+            margin-right: 6px;
+            width: 14px;
+            text-align: center;
+            // Reducimos el tamaño de los iconos
+            font-size: 0.85em;
+          }
+
+          &:hover,
+          &.active {
+            background: $primary-color;
+            color: $text-light;
+          }
+        }
+
+        // Submenús
+        ul {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #444;
+          min-width: 180px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
+          display: none;
+          flex-direction: column;
+          z-index: 1000;
+
+          ul {
+            left: 100%;
+            top: 0;
+          }
+
+          li {
+            // Reducimos la altura de línea en submenús
+            line-height: 2rem;
+
+            a {
+              // Reducimos el padding en submenús
+              padding: 6px 12px;
+              border-bottom: 1px solid #555;
+              font-size: 0.85em;
+
+              &:hover {
+                background: $primary-color;
+              }
+            }
+          }
+        }
+
+        &:hover > ul {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+// Contenedor principal
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large 20px;
+  animation: fadeInUp 0.8s ease-out;
+
+  &.my-5 {
+    margin-top: $spacing-large !important;
+    margin-bottom: $spacing-large !important;
+  }
+}
+
+// Título principal
+h1 {
+  font-size: 2.5rem;
+  color: $text-light;
+  text-align: center;
+  margin-bottom: $spacing-medium;
+  @include text-shadow();
+  animation: bounceIn 1s ease-out;
+
+  &.mb-4 {
+    margin-bottom: 2rem !important;
+  }
+
+  &.text-center {
+    text-align: center !important;
+  }
+}
+
+// Grid de cards
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+
+  &.row-cols-1 > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  &.row-cols-md-3 {
+    @media (min-width: 768px) {
+      > * {
+        flex: 0 0 auto;
+        width: 33.33333%;
+      }
+    }
+  }
+
+  &.g-4 {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+
+    > * {
+      padding-right: calc(var(--bs-gutter-x) * 0.5);
+      padding-left: calc(var(--bs-gutter-x) * 0.5);
+      margin-top: var(--bs-gutter-y);
+    }
+  }
+}
+
+.col {
+  flex: 1 0 0%;
+  animation: fadeInUp 0.6s ease-out;
+
+  // Escalonar las animaciones de las cards
+  &:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  &:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+}
+
+// Cards de productos
+.card {
+  @include glassmorphism(0.15, 0.3);
+  @include hover-lift;
+  border: none;
+  overflow: hidden;
+  box-shadow: 0 10px 25px $shadow-light;
+
+  &.h-100 {
+    height: 100% !important;
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    transition: $transition-smooth;
+    border-bottom: 2px solid $border-light;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    background: $card-background;
+    backdrop-filter: $blur-effect;
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $text-light;
+      @include text-shadow(rgba(0, 0, 0, 0.8));
+      margin-bottom: 0;
+      text-align: center;
+      line-height: 1.3;
+    }
+  }
+
+  // Efecto de brillo al hacer hover
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+    z-index: 1;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Estilos responsivos
+@media (max-width: 768px) {
+  // Padding-top ajustado para móviles
+  body {
+    padding-top: 140px;
+  }
+
+  header {
+    nav ul {
+      flex-direction: column;
+
+      li {
+        ul {
+          position: static;
+          display: none;
+          box-shadow: none;
+          background: #555;
+          border-radius: 0;
+
+          ul {
+            position: static;
+          }
+        }
+
+        &:hover > ul {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .container {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .row {
+    &.row-cols-md-3 > * {
+      width: 100%;
+    }
+  }
+
+  .card {
+    margin-bottom: 20px;
+
+    .card-img-top {
+      height: 150px;
+    }
+
+    .card-body {
+      padding: 1rem;
+
+      .card-title {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  // Padding-top para pantallas muy pequeñas
+  body {
+    padding-top: 160px;
+  }
+
+  .container {
+    padding: 15px 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    .card-img-top {
+      height: 140px;
+    }
+
+    .card-body {
+      padding: 0.8rem;
+
+      .card-title {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Estados de focus para accesibilidad
+nav a:focus,
+.card:focus {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Utilidades adicionales
+.text-glow {
+  @include text-shadow(rgba(0, 123, 255, 0.5));
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+// Animación de entrada para toda la página
+.container {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+// Footer - mismo estilo que quienes_somos.html
+footer {
+  background: $secondary-color;
+  color: $text-light;
+  padding: 25px 15px;
+  margin-top: 50px;
+  border-radius: 8px;
+  border: 1px solid $border-light;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1100px;
+
+  .footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+
+    .footer-section {
+      h3 {
+        color: $primary-color;
+        margin-bottom: 12px;
+        font-size: 1.1em;
+        @include text-shadow();
+
+        i {
+          margin-right: 8px;
+        }
+      }
+
+      p {
+        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: $text-light;
+        font-weight: 500;
+        @include text-shadow();
+
+        i {
+          color: $primary-color;
+          width: 18px;
+        }
+      }
+    }
+  }
+
+  // Responsive footer
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 15px;
+    }
+  }
+}
