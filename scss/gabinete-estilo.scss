@@ -116,7 +116,6 @@ body {
   }
 }
 
-// Header styles - IDÉNTICO A monitor-estilos.scss
 header {
   background: $text-light;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -135,11 +134,10 @@ header {
     margin-bottom: 8px;
 
     img {
-      // Reducimos el tamaño del logo (igual que estilos.css)
       width: 100px;
       height: auto;
       transition: $transition-smooth;
-      // Mantenemos la animación pulse
+
       animation: pulse 2s infinite;
 
       &:hover {
@@ -159,12 +157,11 @@ header {
     max-width: 1100px;
   }
 
-  // Navegación a ancho completo - MODIFICADO
   nav {
     background: $secondary-color;
-    border-radius: 0; // Removido border-radius para que ocupe todo el ancho
-    margin: 0; // Removido margin lateral para que se extienda completamente
-    width: 100%; // Asegura que ocupe todo el ancho
+    border-radius: 0;
+    margin: 0;
+    width: 100%;
 
     ul {
       list-style: none;
@@ -367,15 +364,33 @@ h1 {
     padding: 1.5rem;
     background: $card-background;
     backdrop-filter: $blur-effect;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .card-title {
       font-size: 1.1rem;
       font-weight: 600;
       color: $text-light;
       @include text-shadow(rgba(0, 0, 0, 0.8));
-      margin-bottom: 0;
+      margin-bottom: 15px;
       text-align: center;
       line-height: 1.3;
+      flex-grow: 1;
+    }
+
+    // Estilos para precios
+    .price {
+      text-align: center;
+      font-size: 1.4em;
+      font-weight: bold;
+      color: $primary-color;
+      margin-top: 10px;
+      @include text-shadow(rgba(0, 0, 0, 0.8));
+      background: rgba(0, 123, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 123, 255, 0.3);
     }
   }
 
@@ -460,6 +475,10 @@ h1 {
       .card-title {
         font-size: 1rem;
       }
+
+      .price {
+        font-size: 1.2em;
+      }
     }
   }
 }
@@ -490,6 +509,10 @@ h1 {
       .card-title {
         font-size: 0.9rem;
       }
+
+      .price {
+        font-size: 1.1em;
+      }
     }
   }
 }
@@ -516,25 +539,26 @@ nav a:focus,
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-// Footer - mismo estilo que monitor-estilos.scss
 footer {
   background: $secondary-color;
   color: $text-light;
-  padding: 25px 15px;
+  padding: 25px 0;
   margin-top: 50px;
-  border-radius: 8px;
-  border: 1px solid $border-light;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1100px;
+  border-radius: 0;
+
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
 
   .footer-content {
-    max-width: 900px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 15px;
 
     .footer-section {
       h3 {
@@ -567,10 +591,13 @@ footer {
 
   // Responsive footer
   @media (max-width: 768px) {
+    padding: 20px 0; //
+
     .footer-content {
       grid-template-columns: 1fr;
       text-align: center;
       gap: 15px;
+      width: 95%;
     }
   }
 }

@@ -274,15 +274,31 @@ h1.text-center {
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .card .card-body .card-title {
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  margin-bottom: 0;
+  margin-bottom: 15px;
   text-align: center;
   line-height: 1.3;
+  flex-grow: 1;
+}
+.card .card-body .price {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 123, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 123, 255, 0.3);
 }
 .card::before {
   content: "";
@@ -340,6 +356,9 @@ h1.text-center {
   .card .card-body .card-title {
     font-size: 1rem;
   }
+  .card .card-body .price {
+    font-size: 1.2em;
+  }
 }
 @media (max-width: 480px) {
   body {
@@ -360,6 +379,9 @@ h1.text-center {
   }
   .card .card-body .card-title {
     font-size: 0.9rem;
+  }
+  .card .card-body .price {
+    font-size: 1.1em;
   }
 }
 nav a:focus,
@@ -384,21 +406,22 @@ nav a:focus,
 footer {
   background: #333;
   color: #fff;
-  padding: 25px 15px;
+  padding: 25px 0;
   margin-top: 50px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1100px;
+  border-radius: 0;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
 }
 footer .footer-content {
-  max-width: 900px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 footer .footer-content .footer-section h3 {
   color: #007bff;
@@ -423,10 +446,14 @@ footer .footer-content .footer-section p i {
   width: 18px;
 }
 @media (max-width: 768px) {
+  footer {
+    padding: 20px 0;
+  }
   footer .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 15px;
+    width: 95%;
   }
 }
 

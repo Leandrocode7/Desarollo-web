@@ -93,7 +93,7 @@ $spacing-large: 40px;
   }
 }
 
-// Estilos base para página de monitores
+// Estilos base para página de placas de video
 body {
   font-family: "Arial", sans-serif;
   background: url("Imagenes/cpu.png") no-repeat center center fixed;
@@ -124,7 +124,6 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
-  // Reducimos el padding vertical
   padding: 8px 0;
   transition: $transition-smooth;
 
@@ -162,6 +161,7 @@ header {
     border-radius: 0;
     margin: 0;
     width: 100%;
+
     ul {
       list-style: none;
       margin: 0;
@@ -590,7 +590,7 @@ footer {
 
   // Responsive footer
   @media (max-width: 768px) {
-    padding: 20px 0; //
+    padding: 20px 0;
 
     .footer-content {
       grid-template-columns: 1fr;

@@ -93,7 +93,7 @@ $spacing-large: 40px;
   }
 }
 
-// Estilos base para página de monitores
+// Estilos base para página de discos duros
 body {
   font-family: "Arial", sans-serif;
   background: url("Imagenes/cpu.png") no-repeat center center fixed;
@@ -137,7 +137,6 @@ header {
       width: 100px;
       height: auto;
       transition: $transition-smooth;
-
       animation: pulse 2s infinite;
 
       &:hover {
@@ -162,6 +161,7 @@ header {
     border-radius: 0;
     margin: 0;
     width: 100%;
+
     ul {
       list-style: none;
       margin: 0;
@@ -350,12 +350,14 @@ h1 {
 
   .card-img-top {
     height: 180px;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 15px;
     transition: $transition-smooth;
     border-bottom: 2px solid $border-light;
+    background: rgba(255, 255, 255, 0.05); // Fondo sutil para mejorar contraste
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05); // Reducido el scale para evitar cortes
     }
   }
 
@@ -466,6 +468,7 @@ h1 {
 
     .card-img-top {
       height: 150px;
+      padding: 10px;
     }
 
     .card-body {
@@ -500,6 +503,7 @@ h1 {
   .card {
     .card-img-top {
       height: 140px;
+      padding: 8px;
     }
 
     .card-body {
@@ -590,7 +594,7 @@ footer {
 
   // Responsive footer
   @media (max-width: 768px) {
-    padding: 20px 0; //
+    padding: 20px 0;
 
     .footer-content {
       grid-template-columns: 1fr;
